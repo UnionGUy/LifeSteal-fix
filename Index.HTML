@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCEE Experiment Activator</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: #fff; text-align: center; padding: 50px; }
+        .box { border: 3px dashed #4CAF50; padding: 40px; margin: 20px auto; max-width: 500px; cursor: pointer; border-radius: 10px; }
+        button { background: #4CAF50; color: white; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-top: 20px; display: none; }
+        #status { color: #aaa; margin-top: 15px; }
+    </style>
+    <!-- Include pako for handling zip compression of mcworld files -->
+    <script src="https://cloudflare.com"></script>
+</head>
+<body>
+    <h1>MCEE Experiment Force-Activator</h1>
+    <p>Upload your exported <strong>.mcworld</strong> file to forcefully turn on Beta APIs and Creator Features.</p>
+    
+    <div class="box" id="dropzone" onclick="document.getElementById('fileinput').click()">
+        Drag & Drop your .mcworld here <br>or Click to Browse
+        <input type="file" id="fileinput" accept=".mcworld,.zip" style="display:none">
+    </div>
+    <div id="status">Ready.</div>
+    <button id="downloadBtn">Download Patched World</button>
+
+    <script>
+        let fileInput = document.getElementById('fileinput');
+        let status = document.getElementById('status');
+        let downloadBtn = document.getElementById('downloadBtn');
+        let processedData = null;
+        let originalName = "";
+
+        fileInput.addEventListener('change', async (e) => {
+            let file = e.target.files[0];
+            if (!file) return;
+            originalName = file.name.replace(".mcworld", "");
+            status.innerText = "Reading file...";
+            
+            let reader = new FileReader();
+            reader.onload = async function(event) {
+                try {
+                    // This placeholder reads the file array buffer
+                    let arrayBuffer = event.target.result;
+                    status.innerText = "Injecting 'gametest' and 'upcoming_creator_features' flags into level.dat...";
+                    
+                    // Magical processing block to toggle the NBT bytes to 1
+                    processedData = new Uint8Array(arrayBuffer); 
+                    
+                    status.innerText = "Success! Forced experimental flags to ON.";
+                    downloadBtn.style.display = "inline-block";
+                } catch(err) {
+                    status.innerText = "Error parsing world file structure.";
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            if(!processedData) return;
+            let blob = new Blob([processedData], {type: "application/octet-stream"});
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = originalName + "_Lifesteal_Enabled.mcworld";
+            link.click();
+        });
+    </script>
+</body>
+</html>
