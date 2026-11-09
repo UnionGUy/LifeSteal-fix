@@ -3,15 +3,15 @@
     "header": {
         "description": "API-Free Lifesteal for MCEE",
         "name": "Vanilla Lifesteal",
-        "uuid": "7a3b4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d",
-        "version": [1, 0, 0],
+        "uuid": "da36c347-19aa-4d8e-908d-8bb03b123456",
+        "version":,
         "min_engine_version": [1, 21, 0]
     },
     "modules": [
         {
             "description": "Vanilla Lifesteal Mechanics",
             "type": "data",
-            "uuid": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+            "uuid": "ea49b128-20bb-5e9f-019e-9cc14c654321",
             "version": [1, 0, 0]
         }
     ]
