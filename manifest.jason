@@ -1,15 +1,15 @@
 {
     "format_version": 2,
     "header": {
-        "description": "Vanilla Lifesteal Pack",
-        "name": "Lifesteal No API",
+        "description": "API-Free Lifesteal for MCEE",
+        "name": "Vanilla Lifesteal",
         "uuid": "7a3b4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d",
         "version": [1, 0, 0],
         "min_engine_version": [1, 21, 0]
     },
     "modules": [
         {
-            "description": "Lifesteal Mechanics",
+            "description": "Vanilla Lifesteal Mechanics",
             "type": "data",
             "uuid": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
             "version": [1, 0, 0]
